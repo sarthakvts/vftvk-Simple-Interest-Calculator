@@ -1,44 +1,27 @@
-function validateAmount(){
-    var validating = false;
-var x = document.getElementById("principal").value;
-
-if(x <= 0){
-    if(validating == false) {
-        validating = true
-alert("Enter a positive number");
-setTimeout(function(){
-    document.getElementById("principal").focus();
-    validating = false;
-}, 1);
-}
-}
-}
-function updateRate() 
-{
+function updateRate() {
     var rateval = document.getElementById("rate").value;
-    document.getElementById("rate_val").innerText=rateval;
+    document.getElementById("rate_val").innerText = rateval;
 }
-function compute()
-{
-   var principal = document.getElementById("principal").value;
-   var rate = document.getElementById("rate").value;
-   var interest = principal * years * rate /100;
-   var year = new Date().getFullYear()+parseInt(years);
-   var lin1= `If you deposit ${principal}, \nat an interest rate of ${rate}. \nYou will receive an amount of ${interest}, \n in the year ${year}`;
 
-function updateResult(){
-    function highlightResult(){
-        var newNode = document.createElement("div");
-        newNode.setAttribute(
-           "style",
-           "background-color: yellow; display: inline;"
-        );
-        principal.surroundContents(newNode);
-        rate.surroundContents(newNode);
-        interest.surroundContents(newNode);
-        year.surroundContents(newNode);
+function compute() {
+    var principal = document.getElementById("principal").value;
+    var rate = document.getElementById("rate").value;
+    var years = document.getElementById("years").value;
+
+    if (principal == "") {
+        alert("Amount can't by empty or alphabet character");
+        document.getElementById("principal").focus();
+        return false;
+    } else {
+        if (principal <= 0) {
+            alert("Enter a positive number");
+            document.getElementById("principal").focus();
+            return false;
+        }
     }
-    document.getElementById("result").innerText= lin1;
-}
+    var interest = principal * years * rate / 100;
+    var year = new Date().getFullYear() + parseInt(years);
+    var result = "If you deposit <mark>" + principal + "</mark>,<br> at an interest rate of <mark>" + rate + "</mark> % <br> You will receive an amount of <mark>" + interest + ",</mark><br> in the year <mark>" + year + "</mark>";
+    document.getElementById("result").innerHTML = result;
 
 }
